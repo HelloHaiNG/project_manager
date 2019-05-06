@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.mapper.ProjectMapper">
+    <!--添加项目-->
+    <insert id="addProject" parameterType="project">
+        insert into t_project(pname,ptime,pdetail,uid) value (#{pname},#{ptime},#{pdetail},#{uid})
+    </insert>
+
+    <!--查询项目总数-->
+    <select id="findProjectCount" resultType="Integer">
+        select count(*) from t_project
+    </select>
+
+    <!--模糊查询总数-->
+    <select id="queryProjectLikeCount" parameterType="java.lang.String" resultType="Integer">
+        select count(*) from t_project where pname like '%${value}%'
+    </select>
+
+    <sql id="query_project_like1">
+        <if test="projectCustom != null">
+            <if test="projectCustom.pname != null and projectCustom.pname !=''">
+                and pname like '%${projectCustom.pname}%'
+            </if>
+        </if>
+
+    </sql>
+    <sql id="query_project_like2">
+        <if test="pageBean != null">
+            <if test="pageBean.begin != null and pageBean.pageSize != null">
+                limit #{pageBean.begin},#{pageBean.pageSize}
+            </if>
+        </if>
+    </sql>
+
+    <!--查询-->
+    <select id="queryProject" parameterType="projectQueryVo" resultType="projectCustom">
+        select * from t_project
+        <where>
+            <include refid="query_project_like1"></include>
+        </where>
+        <include refid="query_project_like2"></include>
+    </select>
+
+    <!--更新-->
+    <update id="update" parameterType="projectCustom">
+        update t_project set pname=#{pname},pdetail=#{pdetail},ptime=#{ptime},uid=#{uid} where pid=#{pid}
+    </update>
+
+</mapper>

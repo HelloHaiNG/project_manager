@@ -1,0 +1,8 @@
+
+O
+squid:S106/"9Replace this use of System.out or System.err by a logger.(õù¶÷
+gsquid:CommentedOutCodeLine~"<This block of commented-out lines of code should be removed.(˜ºƒŒ¸ˇˇˇˇ
+`squid:S1192-"IDefine a constant instead of duplicating this literal "username" 4 times.(¬ΩøÛ
+T
+squid:S1062"9Replace this use of System.out or System.err by a logger.(˝öªÜ˚ˇˇˇˇ
+csquid:CommentedOutCodeLineÅ"<This block of commented-out lines of code should be removed.(¿åΩ¥

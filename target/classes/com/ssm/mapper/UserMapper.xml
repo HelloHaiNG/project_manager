@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.mapper.UserMapper">
+    <!--登陆-->
+    <select id="findUserByUsernameAndPassword" parameterType="com.ssm.pojo.User" resultType="com.ssm.pojo.User">
+        select * from t_user where username = #{username} and password = #{password}
+    </select>
+
+    <!--根据username查找用户-->
+    <select id="findUserByUsername" parameterType="java.lang.String" resultType="user">
+        select * from t_user where username = #{value }
+    </select>
+
+    <!--添加用户-->
+    <insert id="addUser" parameterType="user">
+        insert into t_user(username,password) value (#{username},#{password})
+    </insert>
+
+    <!--修改用户-->
+    <update id="updateUser" parameterType="user">
+        update t_user set username = #{username}, password = #{password} where uid = #{uid}
+    </update>
+
+    <!--查询用户总数-->
+    <select id="findUserCount" resultType="Integer">
+        select count(*) from t_user
+    </select>
+
+    <!--分页用户-->
+    <select id="queryUser" parameterType="com.ssm.pojo.PageBean" resultType="user">
+        select * from t_user limit #{begin}, #{pageSize}
+    </select>
+
+    <!--删除用户根据uid-->
+    <delete id="deleteUserByUid" parameterType="Integer">
+        delete from t_user where uid = #{value}
+    </delete>
+</mapper>
